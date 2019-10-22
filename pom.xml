@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/3.1.0 http://maven.apache.org/maven-v3_1_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.inc</groupId>
+	<artifactId>DiffCodeCov</artifactId>
+	<name>DiffCodeCov</name>
+	<packaging>war</packaging>
+	<version>1.0.0</version>
+	<properties>
+		<spring.version>4.2.1.RELEASE</spring.version>
+		<security.version>4.0.3.RELEASE</security.version>
+		<jdk.version>11</jdk.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		
+	<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+<dependency>
+    <groupId>org.jsoup</groupId>
+    <artifactId>jsoup</artifactId>
+    <version>1.11.3</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.6</version>
+</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${security.version}</version>
+		</dependency>
+
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- Spring JDBC dependency -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>3.2.8.RELEASE</version>
+		</dependency>
+
+		<!-- Mysql connector dependency -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.11</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sourceforge.cobertura</groupId>
+			<artifactId>cobertura</artifactId>
+			<version>2.0.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+	<!-- 	<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.5-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency> -->
+		
+		
+		<!-- https://mvnrepository.com/artifact/javax.xml/jaxp-api -->
+		<dependency>
+		    <groupId>javax.xml</groupId>
+		    <artifactId>jaxp-api</artifactId>
+		    <version>1.4.2</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>xmlunit</groupId>
+    		<artifactId>xmlunit</artifactId>
+   			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+		   <groupId>com.sun</groupId>
+		   <artifactId>tools</artifactId>
+		   <version>1.8</version>
+		   <scope>system</scope>
+		   <systemPath>C:\Program Files\Java\jdk-11.0.4\lib\tools.jar</systemPath>
+		 </dependency>
+		 
+		 <!--  <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs</artifactId>
+      <version>4.0.0-beta3</version>
+    </dependency> -->
+    
+    <!-- The DiffUtils library for computing diffs, applying patches, generationg side-by-side view in Java - https://code.google.com/archive/p/java-diff-utils/ -->
+    <dependency> 
+    	<groupId>com.googlecode.java-diff-utils</groupId> 
+    	<artifactId>diffutils</artifactId> 
+    	<version>1.2.1</version> 
+    </dependency>
+
+	</dependencies>
+	
+	<build>
+		<finalName>DiffCodeCov</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+			
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.19.1</version>
+        </plugin>
+ 
+			<plugin>
+        		<groupId>org.codehaus.mojo</groupId>
+        		<artifactId>cobertura-maven-plugin</artifactId>
+        		<version>2.7</version>
+      		</plugin>
+      		
+      		<plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.2</version>
+        <configuration>
+            <destFile>${sonar.jacoco.reportPath}</destFile>
+            <append>true</append>
+        </configuration>
+        <executions>
+            <execution>
+                <id>agent</id>
+                <goals>
+                    <goal>prepare-agent</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+		</plugins>
+	</build>
+	
+	<reporting>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>cobertura-maven-plugin</artifactId>
+            <version>2.7</version>
+            <configuration>
+			<formats>
+				<format>html</format>
+				<format>xml</format>
+			</formats>
+		</configuration>
+        </plugin>
+        
+        <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-site-plugin</artifactId>
+    <version>3.7.1</version>
+</plugin>
+        
+        <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>3.1.8</version>
+            </plugin>
+        
+        
+    </plugins>
+</reporting>
+</project>
